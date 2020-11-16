@@ -1,0 +1,65 @@
+version: "3.8"
+
+
+services:
+  mysql1:
+    image: mysql:5.7
+    container_name: mysql1
+    hostname: mysql1
+    ports:
+      - "3307:3306"
+    volumes:
+      - /Users/kpettit/Docker/MySQLGR/etc/mysql1/my.cnf:/etc/my.cnf
+      - /Users/kpettit/Docker/MySQLGR/etc/mysql1/data/:/var/lib/mysql/
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypass
+    command: ["mysqld"]
+    healthcheck:
+      test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
+      interval: 2s
+      retries: 20
+
+  mysql2:
+    image: mysql:5.7
+    container_name: mysql2
+    hostname: mysql2
+    ports:
+      - "3308:3306"
+    volumes:
+      - /Users/kpettit/Docker/MySQLGR/etc/mysql2/my.cnf:/etc/my.cnf
+      - /Users/kpettit/Docker/MySQLGR/etc/mysql2/data/:/var/lib/mysql/
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypass
+    command: ["mysqld"]
+    healthcheck:
+      test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
+      interval: 2s
+      retries: 20
+
+  mysql3:
+    image: mysql:5.7
+    container_name: mysql3
+    hostname: mysql3
+    ports:
+      - "3309:3306"
+    volumes:
+      - /Users/kpettit/Docker/MySQLGR/etc/mysql3/my.cnf:/etc/my.cnf
+      - /Users/kpettit/Docker/MySQLGR/etc/mysql3/data/:/var/lib/mysql/
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypass
+    command: ["mysqld"]
+    healthcheck:
+      test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
+      interval: 2s
+      retries: 20
+
+  proxysql:
+   image: b6949b31187a
+#    volumes:
+#      - /Users/kpettit/Docker/MySQLGR/etc/proxysql/proxysql.cnf:/etc/proxysql.cnf
+
+   
+
